@@ -13,11 +13,11 @@
     <title>Product Page</title>
   </head>
   <body>
-   <!-- Start Header -->
+    <!-- Start Header -->
     <header>
       <div class="logo-container">
         <div class="toggle-icon">
-          <img src="./src/assets/icons/icon-menu.svg" alt="" />
+          <img src="./src/assets/icons/icon-menu.svg" alt="Open Menu" />
         </div>
 
         <div class="logo">
@@ -27,9 +27,9 @@
 
       <nav class="navbar">
         <div id="close">
-          <img src="./src//assets/icons/icon-close.svg" alt="Close Icon">
+          <img src="./src//assets/icons/icon-close.svg" alt="Close Menu" />
         </div>
-        
+
         <ul class="links">
           <li>Collections</li>
           <li>Men</li>
@@ -50,6 +50,74 @@
       </div>
     </header>
     <!-- End Header -->
+
+    <!-- Start Page Content -->
+    <main>
+      <div class="product-container">
+        <div class="current-img">
+          <img
+            src="./src/assets/imgs/image-product-1.jpg"
+            alt="product1 image"
+          />
+        </div>
+
+        <div class="optional-imgs">
+          <div class="single-option">
+            <img src="./src/assets/imgs/image-product-1-thumbnail.jpg" alt="" />
+          </div>
+          <div class="single-option">
+            <img src="./src/assets/imgs/image-product-2-thumbnail.jpg" alt="" />
+          </div>
+          <div class="single-option">
+            <img src="./src/assets/imgs/image-product-3-thumbnail.jpg" alt="" />
+          </div>
+          <div class="single-option">
+            <img src="./src/assets/imgs/image-product-4-thumbnail.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="product-details">
+        <div class="details-header">
+          <p>sneaker company</p>
+          <h2>full limited edition sneakers</h2>
+        </div>
+
+        <div class="deatails-body">
+          <p>
+            These low-profile sneakers are your perfect casual wear companion.
+            Featuring a durable rubber outer sole they'll withstand everything
+            the weather can offer.
+          </p>
+
+          <div class="price">
+            <div class="price-offer-container">
+              <p class="price-text">$125.00</p>
+              <div class="offer">50%</div>
+            </div>
+            <p class="old-price">$250.00</p>
+          </div>
+        </div>
+
+        <div class="product-actions">
+          <div class="amount">
+            <button>
+              <img src="./src/assets/icons/icon-minus.svg" alt="decrease" />
+            </button>
+            <p>0</p>
+            <button>
+              <img src="./src/assets/icons/icon-plus.svg" alt="increase" />
+            </button>
+          </div>
+
+          <div class="add-to-cart">
+            <img src="./src/assets/icons/icon-cart.svg" alt="Add To Cart" />
+            <p>Add to cart</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- End Page content -->
 
     <script type="module" src="/src/main.ts"></script>
   </body>

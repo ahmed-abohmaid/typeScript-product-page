@@ -212,6 +212,28 @@ nav #close {
   }
 }
 
+/* Start Page Content */
+main {
+  padding: 50px 110px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.current-img img {
+  width: 500px;
+}
+
+.optional-imgs {
+  width: 500px;
+  display: flex;
+}
+
+.optional-imgs img {
+  max-width: 100%;
+}
+
+/* End Page Content */
+
 @media (max-width: 769px) {
   header {
     position: fixed;
