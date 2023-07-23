@@ -13,13 +13,23 @@
     <title>Product Page</title>
   </head>
   <body>
-    <!-- Start Header -->
+   <!-- Start Header -->
     <header>
-      <div class="logo">
-        <h1>sneakers</h1>
+      <div class="logo-container">
+        <div class="toggle-icon">
+          <img src="./src/assets/icons/icon-menu.svg" alt="" />
+        </div>
+
+        <div class="logo">
+          <h1>sneakers</h1>
+        </div>
       </div>
 
-      <nav>
+      <nav class="navbar">
+        <div id="close">
+          <img src="./src//assets/icons/icon-close.svg" alt="Close Icon">
+        </div>
+        
         <ul class="links">
           <li>Collections</li>
           <li>Men</li>
@@ -41,7 +51,6 @@
     </header>
     <!-- End Header -->
 
-    
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
