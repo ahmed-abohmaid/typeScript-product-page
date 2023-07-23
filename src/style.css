@@ -5,7 +5,7 @@
   --neutral-darkGrayishBlue: hsl(219, 9%, 45%);
   --neutral-grayishBlue: hsl(220, 14%, 75%);
   --neutral-lightGrayishBlue: hsl(223, 64%, 98%);
-  --neutral-grayishBlue: hsl(220, 14%, 75%);
+  --hover: 0.4s ease;
 }
 
 * {
@@ -20,21 +20,39 @@ a {
 
 li {
   list-style: none;
+  cursor: pointer;
 }
 
 body {
   font-family: 'Kumbh Sans', sans-serif;
 }
 
+/* Start Header */
+
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 15px;
+  padding-top: 17px;
+  padding: 25px 110px;
+  position: relative;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 220px);
+  height: 1px;
+  background-color: var(--neutral-grayishBlue);
+  opacity: 70%;
 }
 
 header .logo {
-  margin-right: 30px;
+  margin-right: 50px;
+  letter-spacing: -1px;
 }
 
 nav {
@@ -48,6 +66,36 @@ nav {
   gap: 30px;
 }
 
+.links li {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--neutral-darkGrayishBlue);
+  font-weight: 500;
+  transition: var(--hover);
+  position: relative;
+}
+
+.links li:hover {
+  color: var(--neutral-darkBlue);
+}
+
+.links li::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-orange);
+  top: calc(100% + 33px);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: var(--hover) transform;
+}
+
+.links li:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .profile {
   display: flex;
   align-items: center;
@@ -55,7 +103,23 @@ nav {
   gap: 30px;
 }
 
+.cart_icon {
+  cursor: pointer;
+}
+
+.cart_icon img {
+  width: 17px;
+}
+
 .profile_pic img {
   max-width: 100%;
   width: 35px;
+  cursor: pointer;
+  border-radius: 50%;
 }
+
+.profile_pic img:hover {
+  border: 2px solid var(--primary-orange);
+}
+
+/* End Header */
