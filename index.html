@@ -1,13 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Product Page</title>
   </head>
   <body>
-    <div id="app"></div>
+    <header>
+      <div class="logo">
+        <h1>sneakers</h1>
+      </div>
+
+      <nav>
+        <ul class="links">
+          <li>Collection</li>
+          <li>Men</li>
+          <li>Wemen</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
+
+      <div class="profile">
+        <div class="cart_icon">
+          <img src="./src/assets/icons/icon-cart.svg" alt="Cart icon" />
+        </div>
+
+        <div class="profile_pic">
+          <img src="./src/assets/imgs/image-avatar.png" alt="profile picture" />
+        </div>
+      </div>
+    </header>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
