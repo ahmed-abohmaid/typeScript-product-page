@@ -1,27 +1,60 @@
 import './style.css';
 import { changeMainImage } from './models/changeMainImg';
+import { showProductPopup } from './models/showProductPopup';
+
+type DivEle = HTMLDivElement;
 
 /* Header with small devices */
-let toggleIcon = <HTMLDivElement>document.querySelector('.toggle-icon');
-let closeIcon = <HTMLDivElement>document.getElementById('close');
-let navBar = <HTMLMenuElement>document.querySelector('.navbar');
+const toggleIcon = <DivEle>document.querySelector('.toggle-icon');
+const closeIcon = <DivEle>document.getElementById('close');
+const navBar = <HTMLMenuElement>document.querySelector('.navbar');
 
 toggleIcon.addEventListener('click', (): void => {
   navBar.classList.add('open');
+  addOverlay();
 });
 
 closeIcon.addEventListener('click', (): void => {
   navBar.classList.remove('open');
+  removeOverlay();
 });
 
-/* Toggling between product images */
-let mainImg = document.getElementById('main-img') as HTMLImageElement;
-let productImgsContainer = document.querySelectorAll(
+/*  - Toggling between product images
+    - Show Popup
+*/
+const mainImg = document.getElementById('main-img') as HTMLImageElement;
+const productImgsContainer = document.querySelectorAll(
   '.single-option'
-) as NodeListOf<HTMLDivElement>;
+) as NodeListOf<DivEle>;
 
-productImgsContainer.forEach((div: HTMLDivElement): void => {
-  div.addEventListener('click', (): void => {
-    changeMainImage(mainImg, div, productImgsContainer);
-  });
+productImgsContainer.forEach((div: DivEle): void => {
+  div.addEventListener('click', (): void =>
+    changeMainImage(mainImg, div, productImgsContainer)
+  );
 });
+
+// Open product popup
+const popupContainer = document.querySelector(
+  '.product-popup-container'
+) as DivEle;
+
+mainImg.addEventListener('click', (): void => {
+  showProductPopup(popupContainer, addOverlay, removeOverlay)
+})
+
+/* 
+    Global
+*/
+function addOverlay(): void {
+  const overlay = document.createElement('div');
+  overlay.classList.add('overlay');
+
+  document.documentElement.append(overlay);
+}
+
+function removeOverlay(): void {
+  const overlay = document.querySelector('.overlay') as DivEle;
+  if (overlay) {
+    overlay.remove();
+  }
+}

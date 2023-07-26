@@ -174,7 +174,7 @@ main .product-container {
 .current-img img {
   border-radius: 10px;
   width: 400px;
-  transition: opacity var(--hover); 
+  transition: opacity var(--hover);
 }
 
 .optional-imgs {
@@ -351,6 +351,73 @@ main .product-container .current-img .prev {
   font-size: 15px;
 }
 
+main .product-popup-container {
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+main .product-popup-container .close {
+  position: absolute;
+  top: -25px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+main .product-popup-container .close svg path {
+  fill: #fff;
+  transition: var(--hover);
+}
+
+main .product-popup-container .close:hover svg path {
+  fill: var(--primary-orange);
+}
+
+main .product-popup-container .current-img .next {
+  right: -15px;
+}
+
+main .product-popup-container .current-img .prev {
+  left: -15px;
+}
+
+main .product-popup-container .current-img .next,
+main .product-popup-container .current-img .prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+main .product-popup-container .current-img .next svg {
+  margin-left: 3px;
+}
+
+main .product-popup-container .current-img .prev svg {
+  margin-right: 3px;
+}
+
+main .product-popup-container .current-img .next svg path,
+main .product-popup-container .current-img .prev svg path {
+  transition: 0.2s;
+}
+
+main .product-popup-container .current-img .next:hover svg path,
+main .product-popup-container .current-img .prev:hover svg path {
+  stroke: var(--primary-orange);
+}
+
 /* End Page Content */
 
 @media (max-width: 1269px) {
@@ -449,7 +516,7 @@ main .product-container .current-img .prev {
 
 @media (max-width: 769px) {
   header {
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
     right: 0;
@@ -457,7 +524,6 @@ main .product-container .current-img .prev {
     -webkit-box-shadow: 3px 0px 8px -3px rgba(0, 0, 0, 0.68);
     -moz-box-shadow: 3px 0px 8px -3px rgba(0, 0, 0, 0.68);
     box-shadow: 3px 0px 8px -3px rgba(0, 0, 0, 0.68);
-    z-index: 1;
   }
 
   header::before {
@@ -479,7 +545,6 @@ main .product-container .current-img .prev {
   }
 
   main .product-container .current-img {
-    padding-top: 50px;
     position: relative;
   }
 
