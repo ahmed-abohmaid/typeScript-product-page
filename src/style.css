@@ -168,11 +168,13 @@ main .product-container {
 .current-img {
   border-radius: 10px;
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .current-img img {
   border-radius: 10px;
   width: 400px;
+  transition: opacity var(--hover); 
 }
 
 .optional-imgs {
@@ -184,6 +186,8 @@ main .product-container {
 .optional-imgs .single-option {
   position: relative;
   cursor: pointer;
+  border: 3px solid transparent;
+  border-radius: 11px;
 }
 
 .optional-imgs .single-option::before {
@@ -203,13 +207,12 @@ main .product-container {
   opacity: 50%;
 }
 
-.optional-imgs .single-option.focus::before {
+.optional-imgs .single-option.active::before {
   opacity: 70%;
 }
 
-.optional-imgs .single-option.focus {
-  border: 3px solid var(--primary-orange);
-  border-radius: 10px;
+.optional-imgs .single-option.active {
+  border-color: var(--primary-orange);
 }
 
 .optional-imgs img {
