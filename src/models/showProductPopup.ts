@@ -19,8 +19,6 @@ export function showProductPopup(options: PopupOptions): void {
     popupImgId,
   } = options;
 
-  console.log(popupImgId)
-
   addOverlay();
 
   const popupComponent = `
@@ -129,13 +127,21 @@ export function showProductPopup(options: PopupOptions): void {
 
   // Toggling with icons
   nextIcon.addEventListener('click', (): void => {
-    currentItem++;
-    checker();
+    popupMainImg.style.opacity = '0';
+    setTimeout((): void => {
+      popupMainImg.style.opacity = '1';
+      currentItem++;
+      checker();
+    }, 180);
   });
 
   prevIcon.addEventListener('click', (): void => {
-    currentItem--;
-    checker();
+    popupMainImg.style.opacity = '0';
+    setTimeout((): void => {
+      popupMainImg.style.opacity = '1';
+      currentItem--;
+      checker();
+    }, 180);
   });
 
   function checker(): void {

@@ -119,3 +119,19 @@ function removeAllActive(target: NodeListOf<HTMLElement>) {
     div.classList.remove('active');
   });
 }
+
+/**
+ * Cart Functionality
+ */
+
+interface Product {
+  name: string;
+  price: string;
+}
+
+interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
+let quantity = 0;
