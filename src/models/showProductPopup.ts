@@ -7,11 +7,17 @@ interface PopupOptions {
   addOverlay: CallableFunction;
   removeOverlay: CallableFunction;
   removeAllActive: CallableFunction;
+  popupImgId: number;
 }
 
 export function showProductPopup(options: PopupOptions): void {
-  const { popupContainer, addOverlay, removeOverlay, removeAllActive } =
-    options;
+  const {
+    popupContainer,
+    addOverlay,
+    removeOverlay,
+    removeAllActive,
+    popupImgId,
+  } = options;
 
   addOverlay();
 
@@ -24,12 +30,12 @@ export function showProductPopup(options: PopupOptions): void {
 
     <div class="current-img">
       <img
-        src="./src/assets/imgs/image-product-1.jpg"
+        src="./src/assets/imgs/image-product-${popupImgId}.jpg"
         alt="product image1"
         id="main-img"
       />
 
-      <div class="next">
+      <div class="next" id="popup-next">
         <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
           <path
             d="m2 1 8 8-8 8"
@@ -41,7 +47,7 @@ export function showProductPopup(options: PopupOptions): void {
         </svg>
       </div>
 
-      <div class="prev">
+      <div class="prev" id="popup-prev">
         <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M11 1 3 9l8 8"
@@ -85,7 +91,7 @@ export function showProductPopup(options: PopupOptions): void {
       </div>
     </div>
   `;
-  
+
   popupContainer.innerHTML = popupComponent;
   popupContainer.style.opacity = '1';
 
@@ -98,9 +104,9 @@ export function showProductPopup(options: PopupOptions): void {
   const closeIcon = document.querySelector(
     '.product-popup-container .close'
   ) as DivEle;
-  const nextIcon = document.querySelector('.next') as DivEle;
-  const prevIcon = document.querySelector('.prev') as DivEle;
-  let currentItem: number = 1;
+  const nextIcon = document.getElementById('popup-next') as DivEle;
+  const prevIcon = document.getElementById('popup-prev') as DivEle;
+  let currentItem: number = popupImgId;
 
   popupProductImgsContainer.forEach((imgContainer: DivEle): void => {
     imgContainer.addEventListener('click', (): void => {

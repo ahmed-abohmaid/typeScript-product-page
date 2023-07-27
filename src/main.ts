@@ -26,6 +26,9 @@ const mainImg = document.getElementById('main-img') as HTMLImageElement;
 const productImgsContainer = document.querySelectorAll(
   '.single-option'
 ) as NodeListOf<DivEle>;
+const nextIcon = document.getElementById('next') as DivEle;
+const prevIcon = document.getElementById('prev') as DivEle;
+let currentItem: number = 1;
 
 productImgsContainer.forEach((imgContainer: DivEle): void => {
   imgContainer.addEventListener('click', (): void =>
@@ -43,14 +46,53 @@ const popupContainer = document.querySelector(
   '.product-popup-container'
 ) as DivEle;
 
+let popupImgId: number = parseInt(mainImg.dataset.number ?? '0');
+
 mainImg.addEventListener('click', (): void => {
   showProductPopup({
     popupContainer,
     addOverlay,
     removeOverlay,
     removeAllActive,
+    popupImgId,
   });
 });
+
+// Toggle with icons in small devices
+nextIcon.addEventListener('click', (): void => {
+  mainImg.style.opacity = '0';
+  setTimeout((): void => {
+    mainImg.style.opacity = '1';
+    currentItem++;
+    checker();
+  }, 180);
+});
+
+prevIcon.addEventListener('click', (): void => {
+  mainImg.style.opacity = '0';
+  setTimeout((): void => {
+    mainImg.style.opacity = '1';
+    currentItem--;
+    checker();
+  }, 180);
+});
+
+function checker(): void {
+  if (currentItem > productImgsContainer.length) {
+    currentItem = 1;
+  }
+
+  if (currentItem === 0) {
+    currentItem = productImgsContainer.length;
+  }
+
+  mainImg.src = `./src/assets/imgs/image-product-${currentItem}.jpg`;
+  mainImg.dataset.number = currentItem.toString();
+  popupImgId = parseInt(mainImg.dataset.number);
+
+  removeAllActive(productImgsContainer);
+  productImgsContainer[currentItem - 1].classList.add('active');
+}
 
 /* 
     Global

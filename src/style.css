@@ -537,7 +537,7 @@ main .product-popup-container .current-img .prev:hover svg path {
   }
 
   main {
-    padding: 130px 30px;
+    padding: 30px;
   }
 }
 
@@ -629,5 +629,21 @@ main .product-popup-container .current-img .prev:hover svg path {
 
   .product-actions .add-to-cart {
     width: 100%;
+  }
+}
+
+@media (max-width: 467px) {
+  main .product-popup-container .current-img img {
+    width: 280px;
+  }
+
+  main .product-popup-container .optional-imgs {
+    width: 280px;
+  }
+
+  main .product-popup-container .current-img .next,
+  main .product-popup-container .current-img .prev {
+    width: 25px;
+    height: 25px;
   }
 }
