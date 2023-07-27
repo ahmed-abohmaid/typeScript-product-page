@@ -80,6 +80,7 @@ export function showProductPopup(
     </div>
   `;
   popupContainer.innerHTML = popupComponent;
+  popupContainer.style.opacity = '1';
 
   const popupMainImg = document.querySelector(
     '.product-popup-container #main-img'
@@ -98,7 +99,10 @@ export function showProductPopup(
   });
 
   closeIcon.addEventListener('click', (): void => {
-    popupContainer.innerHTML = '';
-    removeOverlay();
+    popupContainer.style.opacity = '0';
+    setTimeout(() => {
+      popupContainer.innerHTML = '';
+      removeOverlay();
+    }, 150);
   });
 }
