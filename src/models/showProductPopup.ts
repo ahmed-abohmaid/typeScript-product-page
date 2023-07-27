@@ -19,6 +19,8 @@ export function showProductPopup(options: PopupOptions): void {
     popupImgId,
   } = options;
 
+  console.log(popupImgId)
+
   addOverlay();
 
   const popupComponent = `
@@ -150,6 +152,7 @@ export function showProductPopup(options: PopupOptions): void {
     removeAllActive(popupProductImgsContainer);
     popupProductImgsContainer[currentItem - 1].classList.add('active');
   }
+  checker();
 
   function closePopup(): void {
     popupContainer.style.opacity = '0';

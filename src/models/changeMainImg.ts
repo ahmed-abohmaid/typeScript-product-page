@@ -6,12 +6,14 @@ interface Options {
 }
 
 export function changeMainImage(options: Options): void {
-  const { mainImg, imgContainer, productImgsContainer, removeAllActive } = options;
+  const { mainImg, imgContainer, productImgsContainer, removeAllActive } =
+    options;
 
   removeAllActive(productImgsContainer);
 
   imgContainer.classList.add('active');
   mainImg.style.opacity = '0.7';
+  mainImg.dataset.number = imgContainer.id;
 
   setTimeout(() => {
     mainImg.src =

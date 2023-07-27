@@ -49,6 +49,8 @@ const popupContainer = document.querySelector(
 let popupImgId: number = parseInt(mainImg.dataset.number ?? '0');
 
 mainImg.addEventListener('click', (): void => {
+  popupImgId = parseInt(mainImg.dataset.number ?? '0');
+
   showProductPopup({
     popupContainer,
     addOverlay,
@@ -93,6 +95,7 @@ function checker(): void {
   removeAllActive(productImgsContainer);
   productImgsContainer[currentItem - 1].classList.add('active');
 }
+checker();
 
 /* 
     Global
