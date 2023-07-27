@@ -2,11 +2,17 @@ import { changeMainImage } from './changeMainImg';
 
 type DivEle = HTMLDivElement;
 
-export function showProductPopup(
-  popupContainer: DivEle,
-  addOverlay: CallableFunction,
-  removeOverlay: CallableFunction
-): void {
+interface PopupOptions {
+  popupContainer: DivEle;
+  addOverlay: CallableFunction;
+  removeOverlay: CallableFunction;
+  removeAllActive: CallableFunction;
+}
+
+export function showProductPopup(options: PopupOptions): void {
+  const { popupContainer, addOverlay, removeOverlay, removeAllActive } =
+    options;
+
   addOverlay();
 
   const popupComponent = `
@@ -49,28 +55,28 @@ export function showProductPopup(
     </div>
 
     <div class="optional-imgs">
-      <div class="single-option active">
+      <div class="single-option active" id="1">
         <img
           src="./src/assets/imgs/image-product-1-thumbnail.jpg"
           alt="product image1"
           data-src="./src/assets/imgs/image-product-1.jpg"
         />
       </div>
-      <div class="single-option">
+      <div class="single-option" id="2">
         <img
           src="./src/assets/imgs/image-product-2-thumbnail.jpg"
           alt="product image3"
           data-src="./src/assets/imgs/image-product-2.jpg"
         />
       </div>
-      <div class="single-option">
+      <div class="single-option" id="3">
         <img
           src="./src/assets/imgs/image-product-3-thumbnail.jpg"
           alt="product image4"
           data-src="./src/assets/imgs/image-product-3.jpg"
         />
       </div>
-      <div class="single-option">
+      <div class="single-option" id="4">
         <img
           src="./src/assets/imgs/image-product-4-thumbnail.jpg"
           alt="product image5"
@@ -79,6 +85,7 @@ export function showProductPopup(
       </div>
     </div>
   `;
+  
   popupContainer.innerHTML = popupComponent;
   popupContainer.style.opacity = '1';
 
@@ -91,18 +98,58 @@ export function showProductPopup(
   const closeIcon = document.querySelector(
     '.product-popup-container .close'
   ) as DivEle;
+  const nextIcon = document.querySelector('.next') as DivEle;
+  const prevIcon = document.querySelector('.prev') as DivEle;
+  let currentItem: number = 1;
 
-  popupProductImgsContainer.forEach((div: DivEle): void => {
-    div.addEventListener('click', (): void =>
-      changeMainImage(popupMainImg, div, popupProductImgsContainer)
-    );
+  popupProductImgsContainer.forEach((imgContainer: DivEle): void => {
+    imgContainer.addEventListener('click', (): void => {
+      currentItem = parseInt(imgContainer.id);
+
+      changeMainImage({
+        mainImg: popupMainImg,
+        imgContainer,
+        productImgsContainer: popupProductImgsContainer,
+        removeAllActive,
+      });
+    });
   });
 
   closeIcon.addEventListener('click', (): void => {
+    closePopup();
+  });
+
+  // Toggling with icons
+  nextIcon.addEventListener('click', (): void => {
+    currentItem++;
+    checker();
+  });
+
+  prevIcon.addEventListener('click', (): void => {
+    currentItem--;
+    checker();
+  });
+
+  function checker(): void {
+    if (currentItem > popupProductImgsContainer.length) {
+      currentItem = 1;
+    }
+
+    if (currentItem === 0) {
+      currentItem = popupProductImgsContainer.length;
+    }
+
+    popupMainImg.src = `./src/assets/imgs/image-product-${currentItem}.jpg`;
+
+    removeAllActive(popupProductImgsContainer);
+    popupProductImgsContainer[currentItem - 1].classList.add('active');
+  }
+
+  function closePopup(): void {
     popupContainer.style.opacity = '0';
     setTimeout(() => {
       popupContainer.innerHTML = '';
       removeOverlay();
     }, 150);
-  });
+  }
 }

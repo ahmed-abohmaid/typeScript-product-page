@@ -27,9 +27,14 @@ const productImgsContainer = document.querySelectorAll(
   '.single-option'
 ) as NodeListOf<DivEle>;
 
-productImgsContainer.forEach((div: DivEle): void => {
-  div.addEventListener('click', (): void =>
-    changeMainImage(mainImg, div, productImgsContainer)
+productImgsContainer.forEach((imgContainer: DivEle): void => {
+  imgContainer.addEventListener('click', (): void =>
+    changeMainImage({
+      mainImg,
+      imgContainer,
+      productImgsContainer,
+      removeAllActive,
+    })
   );
 });
 
@@ -39,8 +44,13 @@ const popupContainer = document.querySelector(
 ) as DivEle;
 
 mainImg.addEventListener('click', (): void => {
-  showProductPopup(popupContainer, addOverlay, removeOverlay)
-})
+  showProductPopup({
+    popupContainer,
+    addOverlay,
+    removeOverlay,
+    removeAllActive,
+  });
+});
 
 /* 
     Global
@@ -57,4 +67,10 @@ function removeOverlay(): void {
   if (overlay) {
     overlay.remove();
   }
+}
+
+function removeAllActive(target: NodeListOf<HTMLElement>) {
+  target.forEach((div: HTMLElement): void => {
+    div.classList.remove('active');
+  });
 }
