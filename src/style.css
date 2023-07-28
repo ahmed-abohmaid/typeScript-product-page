@@ -451,6 +451,7 @@ main .product-container .current-img .prev {
 
 .product-details .product-actions .amount #amount-number {
   font-weight: 700;
+  width: 10px;
 }
 
 .product-details .product-actions .add-to-cart {
