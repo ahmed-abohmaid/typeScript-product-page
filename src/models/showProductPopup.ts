@@ -35,7 +35,7 @@ export function showProductPopup(options: PopupOptions): void {
         id="main-img"
       />
 
-      <div class="next" id="popup-next">
+      <button class="next" id="popup-next">
         <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
           <path
             d="m2 1 8 8-8 8"
@@ -45,9 +45,9 @@ export function showProductPopup(options: PopupOptions): void {
             fill-rule="evenodd"
           />
         </svg>
-      </div>
+      </button>
 
-      <div class="prev" id="popup-prev">
+      <button class="prev" id="popup-prev">
         <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M11 1 3 9l8 8"
@@ -57,7 +57,7 @@ export function showProductPopup(options: PopupOptions): void {
             fill-rule="evenodd"
           />
         </svg>
-      </div>
+      </button>
     </div>
 
     <div class="optional-imgs">

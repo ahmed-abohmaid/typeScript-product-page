@@ -1,6 +1,8 @@
 import './style.css';
 import { changeMainImage } from './models/changeMainImg';
 import { showProductPopup } from './models/showProductPopup';
+import { addToCart } from './models/addToCart';
+import { Product } from './interfaces/cartInterfaces';
 
 type DivEle = HTMLDivElement;
 
@@ -123,15 +125,86 @@ function removeAllActive(target: NodeListOf<HTMLElement>) {
 /**
  * Cart Functionality
  */
-
-interface Product {
-  name: string;
-  price: string;
-}
-
-interface CartItem {
-  product: Product;
-  quantity: number;
-}
+const cartIcon = document.querySelector('.cart_icon') as HTMLDivElement;
+const cartItems = document.querySelector('.cart-items') as HTMLDivElement;
+const increaseBtn = document.getElementById('increase') as HTMLButtonElement;
+const decreaseBtn = document.getElementById('decrease') as HTMLButtonElement;
+const addToCartBtn = document.querySelector(
+  '.add-to-cart'
+) as HTMLButtonElement;
+const productName = document.getElementById(
+  'product-name'
+) as HTMLHeadingElement;
+const productPrice = document.getElementById(
+  'product-price'
+) as HTMLSpanElement;
+const productOldPrice = document.querySelector(
+  '.old-price-number'
+) as HTMLSpanElement;
+const productDiscount = document.getElementById(
+  'product-discount'
+) as HTMLSpanElement;
 
 let quantity = 0;
+
+// Adding product price after discount
+calcProductPrice();
+
+cartIcon.addEventListener('click', (): void => {
+  cartItems.classList.toggle('active');
+});
+
+increaseBtn.addEventListener('click', (): void => {
+  increaseBtn.disabled = false;
+  decreaseBtn.disabled = false;
+
+  quantity++;
+
+  if (quantity > 50) {
+    quantity = 50;
+    increaseBtn.disabled = true;
+  }
+
+  changeAmount(quantity);
+});
+
+decreaseBtn.addEventListener('click', (): void => {
+  decreaseBtn.disabled = false;
+
+  quantity--;
+
+  if (quantity <= 0) {
+    quantity = 0;
+    decreaseBtn.disabled = true;
+  }
+
+  changeAmount(quantity);
+});
+
+// Add Product To The Cart
+const product: Product = {
+  name: productName.innerHTML,
+  price: parseFloat(productPrice.innerHTML),
+};
+
+addToCartBtn.addEventListener('click', (): void =>
+  addToCart({ products: [product], quantity })
+);
+
+function calcProductPrice(): void {
+  let productNewPrice: number =
+    parseFloat(productOldPrice.innerHTML) *
+    (parseFloat(productDiscount.innerHTML) / 100);
+
+  productPrice.innerHTML = productNewPrice.toString().includes('.')
+    ? productNewPrice.toString()
+    : `${productNewPrice.toString()}.00`;
+}
+
+function changeAmount(quantity: number): void {
+  const amountNumber = document.getElementById(
+    'amount-number'
+  ) as HTMLParagraphElement;
+
+  amountNumber.innerHTML = `${quantity}`;
+}

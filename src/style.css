@@ -38,6 +38,16 @@ body {
   z-index: 99;
 }
 
+::-moz-selection {
+  color: white;
+  background: var(--primary-orange);
+}
+
+::selection {
+  color: white;
+  background: var(--primary-orange);
+}
+
 /* Start Header */
 
 header {
@@ -109,17 +119,16 @@ header .cart-items .title {
 }
 
 header .cart-items .data {
-  flex: 1;
   position: relative;
+  margin-top: 50px;
 }
 
-header .cart-items .data > p {
+header .cart-items .data .empty {
   font-size: 13px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: none;
 }
 
 header .cart-items .data #cart-item {
@@ -235,14 +244,17 @@ nav #close {
 .cart_icon {
   cursor: pointer;
   position: relative;
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
 
-.cart_icon #cart-amount {
+.cart_icon .cart-amount {
   position: absolute;
   top: -5px;
   right: -5px;
-  width: 15px;
-  height: 12px;
+  width: 18px;
+  height: 13px;
   border-radius: 6px;
   background-color: var(--primary-orange);
   color: #fff;
@@ -251,6 +263,7 @@ nav #close {
   display: flex;
   align-items: center;
   justify-content: center;
+  display: none;
 }
 
 .profile_pic img {
@@ -428,6 +441,14 @@ main .product-container .current-img .prev {
   opacity: 75%;
 }
 
+.product-details .product-actions .amount button:disabled {
+  cursor: not-allowed;
+}
+
+.product-details .product-actions .amount button:disabled svg use {
+  opacity: 60%;
+}
+
 .product-details .product-actions .amount #amount-number {
   font-weight: 700;
 }
@@ -512,6 +533,8 @@ main .product-popup-container .current-img .prev {
   width: 30px;
   height: 30px;
   cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 main .product-popup-container .current-img .next svg {
@@ -703,6 +726,8 @@ main .product-popup-container .current-img .prev:hover svg path {
     width: 30px;
     height: 30px;
     cursor: pointer;
+    border: none;
+    outline: none;
   }
 
   main .product-container .current-img .next {
