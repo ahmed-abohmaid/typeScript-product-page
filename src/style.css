@@ -481,7 +481,7 @@ main .product-container .current-img .prev {
   fill: #fff;
 }
 
-.product-details .product-actions .add-to-cart p {
+.product-details .product-actions .add-to-cart {
   font-weight: 500;
   font-size: 15px;
 }
