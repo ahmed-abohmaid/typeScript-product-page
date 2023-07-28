@@ -3,6 +3,7 @@ import { changeMainImage } from './models/changeMainImg';
 import { showProductPopup } from './models/showProductPopup';
 import { addToCart } from './models/addToCart';
 import { Product } from './interfaces/cartInterfaces';
+import { imageSources } from './interfaces/imagesInterface';
 
 type DivEle = HTMLDivElement;
 
@@ -90,7 +91,7 @@ function checker(): void {
     currentItem = productImgsContainer.length;
   }
 
-  mainImg.src = `./src/assets/imgs/image-product-${currentItem}.jpg`;
+  mainImg.src = `${imageSources[currentItem]}`;
   mainImg.dataset.number = currentItem.toString();
   popupImgId = parseInt(mainImg.dataset.number);
 

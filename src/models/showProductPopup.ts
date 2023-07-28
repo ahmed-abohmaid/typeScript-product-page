@@ -1,4 +1,9 @@
 import { changeMainImage } from './changeMainImg';
+import imageProductThumb1 from '../assets/imgs/image-product-1-thumbnail.jpg';
+import imageProductThumb2 from '../assets/imgs/image-product-2-thumbnail.jpg';
+import imageProductThumb3 from '../assets/imgs/image-product-3-thumbnail.jpg';
+import imageProductThumb4 from '../assets/imgs/image-product-4-thumbnail.jpg';
+import { imageSources } from '../interfaces/imagesInterface';
 
 type DivEle = HTMLDivElement;
 
@@ -9,6 +14,13 @@ interface PopupOptions {
   removeAllActive: CallableFunction;
   popupImgId: number;
 }
+
+const imageSourcesThumb: Record<number, string> = {
+  1: imageProductThumb1,
+  2: imageProductThumb2,
+  3: imageProductThumb3,
+  4: imageProductThumb4,
+};
 
 export function showProductPopup(options: PopupOptions): void {
   const {
@@ -30,7 +42,7 @@ export function showProductPopup(options: PopupOptions): void {
 
     <div class="current-img">
       <img
-        src="./src/assets/imgs/image-product-${popupImgId}.jpg"
+        src="${imageSources[popupImgId]}"
         alt="product image1"
         id="main-img"
       />
@@ -63,30 +75,30 @@ export function showProductPopup(options: PopupOptions): void {
     <div class="optional-imgs">
       <div class="single-option active" id="1">
         <img
-          src="./src/assets/imgs/image-product-1-thumbnail.jpg"
+          src="${imageSourcesThumb[1]}"
           alt="product image1"
-          data-src="./src/assets/imgs/image-product-1.jpg"
+          data-src="${imageSources[1]}"
         />
       </div>
       <div class="single-option" id="2">
         <img
-          src="./src/assets/imgs/image-product-2-thumbnail.jpg"
+          src="${imageSourcesThumb[2]}"
           alt="product image3"
-          data-src="./src/assets/imgs/image-product-2.jpg"
+          data-src="${imageSources[2]}"
         />
       </div>
       <div class="single-option" id="3">
         <img
-          src="./src/assets/imgs/image-product-3-thumbnail.jpg"
+          src="${imageSourcesThumb[3]}"
           alt="product image4"
-          data-src="./src/assets/imgs/image-product-3.jpg"
+          data-src="${imageSources[3]}"
         />
       </div>
       <div class="single-option" id="4">
         <img
-          src="./src/assets/imgs/image-product-4-thumbnail.jpg"
+          src="${imageSourcesThumb[4]}"
           alt="product image5"
-          data-src="./src/assets/imgs/image-product-4.jpg"
+          data-src="${imageSources[4]}"
         />
       </div>
     </div>
@@ -153,7 +165,7 @@ export function showProductPopup(options: PopupOptions): void {
       currentItem = popupProductImgsContainer.length;
     }
 
-    popupMainImg.src = `./src/assets/imgs/image-product-${currentItem}.jpg`;
+    popupMainImg.src = `${imageSources[currentItem]}`;
 
     removeAllActive(popupProductImgsContainer);
     popupProductImgsContainer[currentItem - 1].classList.add('active');

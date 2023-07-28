@@ -1,4 +1,6 @@
 import { CartItem } from '../interfaces/cartInterfaces';
+import imageProduct1 from '../assets/imgs/image-product-1.jpg';
+import deleteIconSvg from '../assets/icons/icon-delete.svg';
 
 const cartItemsData = document.querySelector(
   '.cart-items .data'
@@ -32,7 +34,7 @@ export function addToCart(
       <ul id="cart-item">
         <li>
           <img
-            src="./src/assets/imgs/image-product-1-thumbnail.jpg"
+            src="${imageProduct1}"
             alt="product image"
           />
           <div class="details">
@@ -45,7 +47,7 @@ export function addToCart(
             </p>
           </div>
           <button id="delete">
-            <img src="./src/assets/icons/icon-delete.svg" alt="delete" />
+            <img src="${deleteIconSvg}" alt="delete" />
           </button>
         </li>
       </ul>
