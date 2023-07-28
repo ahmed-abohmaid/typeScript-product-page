@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/typeScript-ecommerce-product-page/',
+  base: '/Frontend-Mentor-Challenges/typeScript-ecommerce-product-page/',
 });
