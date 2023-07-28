@@ -103,11 +103,12 @@ header .cart-items {
   display: flex;
   flex-direction: column;
   z-index: 50;
-  display: none;
+  transform: scale(0);
+  transition: 0.2s transform;
 }
 
 header .cart-items.active {
-  display: block;
+  transform: scale(100%);
 }
 
 header .cart-items .title {
