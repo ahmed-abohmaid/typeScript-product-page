@@ -157,6 +157,7 @@ cartIcon.addEventListener('click', (): void => {
 increaseBtn.addEventListener('click', (): void => {
   increaseBtn.disabled = false;
   decreaseBtn.disabled = false;
+  addToCartBtn.disabled = false;
 
   quantity++;
 
@@ -170,12 +171,14 @@ increaseBtn.addEventListener('click', (): void => {
 
 decreaseBtn.addEventListener('click', (): void => {
   decreaseBtn.disabled = false;
+  addToCartBtn.disabled = false;
 
   quantity--;
 
   if (quantity <= 0) {
     quantity = 0;
     decreaseBtn.disabled = true;
+    addToCartBtn.disabled = true;
   }
 
   changeAmount(quantity);
@@ -188,7 +191,7 @@ const product: Product = {
 };
 
 addToCartBtn.addEventListener('click', (): void =>
-  addToCart({ products: [product], quantity })
+  addToCart({ products: [product], quantity }, deleteCartItem)
 );
 
 function calcProductPrice(): void {
@@ -207,4 +210,16 @@ function changeAmount(quantity: number): void {
   ) as HTMLParagraphElement;
 
   amountNumber.innerHTML = `${quantity}`;
+}
+
+function deleteCartItem(
+  cartData: HTMLDivElement,
+  cartAmountPopup: HTMLDivElement
+): void {
+  quantity = 0;
+  cartAmountPopup.style.display = 'none';
+  cartAmountPopup.innerHTML = '';
+  cartData.style.marginTop = '50px';
+  cartData.innerHTML = `<p class="empty">Your cart is empty.</p>`;
+  changeAmount(quantity);
 }
