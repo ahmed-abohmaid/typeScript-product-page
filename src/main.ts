@@ -11,6 +11,12 @@ type DivEle = HTMLDivElement;
 const toggleIcon = <DivEle>document.querySelector('.toggle-icon');
 const closeIcon = <DivEle>document.getElementById('close');
 const navBar = <HTMLMenuElement>document.querySelector('.navbar');
+const mainImg = document.getElementById('main-img') as HTMLImageElement;
+const productImgsContainer = document.querySelectorAll(
+  '.single-option'
+) as NodeListOf<DivEle>;
+const nextIcon = document.getElementById('next') as DivEle;
+const prevIcon = document.getElementById('prev') as DivEle;
 
 toggleIcon.addEventListener('click', (): void => {
   navBar.classList.add('open');
@@ -22,15 +28,16 @@ closeIcon.addEventListener('click', (): void => {
   removeOverlay();
 });
 
+/**
+ * Adding data-src to all thumbnal imgs
+ */
+productImgsContainer.forEach((imgContainer: DivEle, i:number): void => {
+  (imgContainer.children[0] as HTMLElement).dataset.src = `${imageSources[i + 1]}`;
+});
+
 /*  - Toggling between product images
     - Show Popup
 */
-const mainImg = document.getElementById('main-img') as HTMLImageElement;
-const productImgsContainer = document.querySelectorAll(
-  '.single-option'
-) as NodeListOf<DivEle>;
-const nextIcon = document.getElementById('next') as DivEle;
-const prevIcon = document.getElementById('prev') as DivEle;
 let currentItem: number = 1;
 
 productImgsContainer.forEach((imgContainer: DivEle): void => {
