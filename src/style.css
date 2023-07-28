@@ -294,13 +294,13 @@ main .product-container {
 .current-img {
   border-radius: 10px;
   margin-bottom: 15px;
-  cursor: pointer;
 }
 
 .current-img img {
   border-radius: 10px;
   width: 400px;
   transition: opacity var(--hover);
+  cursor: pointer;
 }
 
 .optional-imgs {
