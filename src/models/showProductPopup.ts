@@ -1,25 +1,7 @@
 import { changeMainImage } from './changeMainImg';
-import imageProductThumb1 from '../assets/imgs/image-product-1-thumbnail.jpg';
-import imageProductThumb2 from '../assets/imgs/image-product-2-thumbnail.jpg';
-import imageProductThumb3 from '../assets/imgs/image-product-3-thumbnail.jpg';
-import imageProductThumb4 from '../assets/imgs/image-product-4-thumbnail.jpg';
-import { imageSources } from '../interfaces/imagesInterface';
+import { imageSources, imageSourcesThumb } from '../interfaces/imagesInterface';
 import { checkImgCard } from './checkImgCard';
-
-interface PopupOptions {
-  popupContainer: HTMLDivElement;
-  addOverlay: CallableFunction;
-  removeOverlay: CallableFunction;
-  removeAllActive: CallableFunction;
-  popupImgId: number;
-}
-
-const imageSourcesThumb: Record<number, string> = {
-  1: imageProductThumb1,
-  2: imageProductThumb2,
-  3: imageProductThumb3,
-  4: imageProductThumb4,
-};
+import { PopupOptions } from '../interfaces/productInterfaces';
 
 export function showProductPopup(options: PopupOptions): void {
   const {
@@ -146,7 +128,7 @@ export function showProductPopup(options: PopupOptions): void {
       if (currentItem > popupProductImgsContainer.length) {
         currentItem = 1;
       }
-    
+
       checkImgCard(
         currentItem,
         popupProductImgsContainer,

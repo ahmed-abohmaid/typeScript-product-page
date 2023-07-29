@@ -1,11 +1,6 @@
-interface Options {
-  mainImg: HTMLImageElement;
-  imgContainer: HTMLDivElement;
-  productImgsContainer: NodeListOf<HTMLDivElement>;
-  removeAllActive: CallableFunction;
-}
+import { MainImgOptions } from '../interfaces/productInterfaces';
 
-export function changeMainImage(options: Options): void {
+export function changeMainImage(options: MainImgOptions): void {
   const { mainImg, imgContainer, productImgsContainer, removeAllActive } =
     options;
 
