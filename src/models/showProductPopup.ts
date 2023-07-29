@@ -1,26 +1,7 @@
 import { changeMainImage } from './changeMainImg';
-import imageProductThumb1 from '../assets/imgs/image-product-1-thumbnail.jpg';
-import imageProductThumb2 from '../assets/imgs/image-product-2-thumbnail.jpg';
-import imageProductThumb3 from '../assets/imgs/image-product-3-thumbnail.jpg';
-import imageProductThumb4 from '../assets/imgs/image-product-4-thumbnail.jpg';
-import { imageSources } from '../interfaces/imagesInterface';
-
-type DivEle = HTMLDivElement;
-
-interface PopupOptions {
-  popupContainer: DivEle;
-  addOverlay: CallableFunction;
-  removeOverlay: CallableFunction;
-  removeAllActive: CallableFunction;
-  popupImgId: number;
-}
-
-const imageSourcesThumb: Record<number, string> = {
-  1: imageProductThumb1,
-  2: imageProductThumb2,
-  3: imageProductThumb3,
-  4: imageProductThumb4,
-};
+import { imageSources, imageSourcesThumb } from '../interfaces/imagesInterface';
+import { checkImgCard } from './checkImgCard';
+import { PopupOptions } from '../interfaces/productInterfaces';
 
 export function showProductPopup(options: PopupOptions): void {
   const {
@@ -112,15 +93,15 @@ export function showProductPopup(options: PopupOptions): void {
   ) as HTMLImageElement;
   const popupProductImgsContainer = document.querySelectorAll(
     '.product-popup-container .single-option'
-  ) as NodeListOf<DivEle>;
+  ) as NodeListOf<HTMLDivElement>;
   const closeIcon = document.querySelector(
     '.product-popup-container .close'
-  ) as DivEle;
-  const nextIcon = document.getElementById('popup-next') as DivEle;
-  const prevIcon = document.getElementById('popup-prev') as DivEle;
+  ) as HTMLDivElement;
+  const nextIcon = document.getElementById('popup-next') as HTMLDivElement;
+  const prevIcon = document.getElementById('popup-prev') as HTMLDivElement;
   let currentItem: number = popupImgId;
 
-  popupProductImgsContainer.forEach((imgContainer: DivEle): void => {
+  popupProductImgsContainer.forEach((imgContainer: HTMLDivElement): void => {
     imgContainer.addEventListener('click', (): void => {
       currentItem = parseInt(imgContainer.id);
 
@@ -143,7 +124,18 @@ export function showProductPopup(options: PopupOptions): void {
     setTimeout((): void => {
       popupMainImg.style.opacity = '1';
       currentItem++;
-      checker();
+
+      if (currentItem > popupProductImgsContainer.length) {
+        currentItem = 1;
+      }
+
+      checkImgCard(
+        currentItem,
+        popupProductImgsContainer,
+        popupMainImg,
+        popupImgId,
+        removeAllActive
+      );
     }, 180);
   });
 
@@ -152,25 +144,28 @@ export function showProductPopup(options: PopupOptions): void {
     setTimeout((): void => {
       popupMainImg.style.opacity = '1';
       currentItem--;
-      checker();
+
+      if (currentItem === 0) {
+        currentItem = popupProductImgsContainer.length;
+      }
+
+      checkImgCard(
+        currentItem,
+        popupProductImgsContainer,
+        popupMainImg,
+        popupImgId,
+        removeAllActive
+      );
     }, 180);
   });
 
-  function checker(): void {
-    if (currentItem > popupProductImgsContainer.length) {
-      currentItem = 1;
-    }
-
-    if (currentItem === 0) {
-      currentItem = popupProductImgsContainer.length;
-    }
-
-    popupMainImg.src = `${imageSources[currentItem]}`;
-
-    removeAllActive(popupProductImgsContainer);
-    popupProductImgsContainer[currentItem - 1].classList.add('active');
-  }
-  checker();
+  checkImgCard(
+    currentItem,
+    popupProductImgsContainer,
+    popupMainImg,
+    popupImgId,
+    removeAllActive
+  );
 
   function closePopup(): void {
     popupContainer.style.opacity = '0';

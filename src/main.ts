@@ -4,19 +4,18 @@ import { showProductPopup } from './models/showProductPopup';
 import { addToCart } from './models/addToCart';
 import { Product } from './interfaces/cartInterfaces';
 import { imageSources } from './interfaces/imagesInterface';
-
-type DivEle = HTMLDivElement;
+import { checkImgCard } from './models/checkImgCard';
 
 /* Header with small devices */
-const toggleIcon = <DivEle>document.querySelector('.toggle-icon');
-const closeIcon = <DivEle>document.getElementById('close');
+const toggleIcon = <HTMLDivElement>document.querySelector('.toggle-icon');
+const closeIcon = <HTMLDivElement>document.getElementById('close');
 const navBar = <HTMLMenuElement>document.querySelector('.navbar');
 const mainImg = document.getElementById('main-img') as HTMLImageElement;
 const productImgsContainer = document.querySelectorAll(
   '.single-option'
-) as NodeListOf<DivEle>;
-const nextIcon = document.getElementById('next') as DivEle;
-const prevIcon = document.getElementById('prev') as DivEle;
+) as NodeListOf<HTMLDivElement>;
+const nextIcon = document.getElementById('next') as HTMLDivElement;
+const prevIcon = document.getElementById('prev') as HTMLDivElement;
 
 toggleIcon.addEventListener('click', (): void => {
   navBar.classList.add('open');
@@ -31,16 +30,20 @@ closeIcon.addEventListener('click', (): void => {
 /**
  * Adding data-src to all thumbnal imgs
  */
-productImgsContainer.forEach((imgContainer: DivEle, i:number): void => {
-  (imgContainer.children[0] as HTMLElement).dataset.src = `${imageSources[i + 1]}`;
-});
+productImgsContainer.forEach(
+  (imgContainer: HTMLDivElement, i: number): void => {
+    (imgContainer.children[0] as HTMLElement).dataset.src = `${
+      imageSources[i + 1]
+    }`;
+  }
+);
 
 /*  - Toggling between product images
     - Show Popup
 */
 let currentItem: number = 1;
 
-productImgsContainer.forEach((imgContainer: DivEle): void => {
+productImgsContainer.forEach((imgContainer: HTMLDivElement): void => {
   imgContainer.addEventListener('click', (): void =>
     changeMainImage({
       mainImg,
@@ -54,7 +57,7 @@ productImgsContainer.forEach((imgContainer: DivEle): void => {
 // Open product popup
 const popupContainer = document.querySelector(
   '.product-popup-container'
-) as DivEle;
+) as HTMLDivElement;
 
 let popupImgId: number = parseInt(mainImg.dataset.number ?? '0');
 
@@ -76,7 +79,18 @@ nextIcon.addEventListener('click', (): void => {
   setTimeout((): void => {
     mainImg.style.opacity = '1';
     currentItem++;
-    checker();
+
+    if (currentItem > productImgsContainer.length) {
+      currentItem = 1;
+    }
+
+    checkImgCard(
+      currentItem,
+      productImgsContainer,
+      mainImg,
+      popupImgId,
+      removeAllActive
+    );
   }, 180);
 });
 
@@ -85,27 +99,28 @@ prevIcon.addEventListener('click', (): void => {
   setTimeout((): void => {
     mainImg.style.opacity = '1';
     currentItem--;
-    checker();
+
+    if (currentItem === 0) {
+      currentItem = productImgsContainer.length;
+    }
+
+    checkImgCard(
+      currentItem,
+      productImgsContainer,
+      mainImg,
+      popupImgId,
+      removeAllActive
+    );
   }, 180);
 });
 
-function checker(): void {
-  if (currentItem > productImgsContainer.length) {
-    currentItem = 1;
-  }
-
-  if (currentItem === 0) {
-    currentItem = productImgsContainer.length;
-  }
-
-  mainImg.src = `${imageSources[currentItem]}`;
-  mainImg.dataset.number = currentItem.toString();
-  popupImgId = parseInt(mainImg.dataset.number);
-
-  removeAllActive(productImgsContainer);
-  productImgsContainer[currentItem - 1].classList.add('active');
-}
-checker();
+checkImgCard(
+  currentItem,
+  productImgsContainer,
+  mainImg,
+  popupImgId,
+  removeAllActive
+);
 
 /* 
     Global
@@ -118,7 +133,7 @@ function addOverlay(): void {
 }
 
 function removeOverlay(): void {
-  const overlay = document.querySelector('.overlay') as DivEle;
+  const overlay = document.querySelector('.overlay') as HTMLDivElement;
   if (overlay) {
     overlay.remove();
   }
