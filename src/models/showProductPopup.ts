@@ -5,10 +5,8 @@ import imageProductThumb3 from '../assets/imgs/image-product-3-thumbnail.jpg';
 import imageProductThumb4 from '../assets/imgs/image-product-4-thumbnail.jpg';
 import { imageSources } from '../interfaces/imagesInterface';
 
-type DivEle = HTMLDivElement;
-
 interface PopupOptions {
-  popupContainer: DivEle;
+  popupContainer: HTMLDivElement;
   addOverlay: CallableFunction;
   removeOverlay: CallableFunction;
   removeAllActive: CallableFunction;
@@ -112,15 +110,15 @@ export function showProductPopup(options: PopupOptions): void {
   ) as HTMLImageElement;
   const popupProductImgsContainer = document.querySelectorAll(
     '.product-popup-container .single-option'
-  ) as NodeListOf<DivEle>;
+  ) as NodeListOf<HTMLDivElement>;
   const closeIcon = document.querySelector(
     '.product-popup-container .close'
-  ) as DivEle;
-  const nextIcon = document.getElementById('popup-next') as DivEle;
-  const prevIcon = document.getElementById('popup-prev') as DivEle;
+  ) as HTMLDivElement;
+  const nextIcon = document.getElementById('popup-next') as HTMLDivElement;
+  const prevIcon = document.getElementById('popup-prev') as HTMLDivElement;
   let currentItem: number = popupImgId;
 
-  popupProductImgsContainer.forEach((imgContainer: DivEle): void => {
+  popupProductImgsContainer.forEach((imgContainer: HTMLDivElement): void => {
     imgContainer.addEventListener('click', (): void => {
       currentItem = parseInt(imgContainer.id);
 
