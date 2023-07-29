@@ -1,11 +1,11 @@
-import imageProduct1 from '../assets/imgs/image-product-1.jpg';
-import imageProduct2 from '../assets/imgs/image-product-2.jpg';
-import imageProduct3 from '../assets/imgs/image-product-3.jpg';
-import imageProduct4 from '../assets/imgs/image-product-4.jpg';
-import imageProductThumb1 from '../assets/imgs/image-product-1-thumbnail.jpg';
-import imageProductThumb2 from '../assets/imgs/image-product-2-thumbnail.jpg';
-import imageProductThumb3 from '../assets/imgs/image-product-3-thumbnail.jpg';
-import imageProductThumb4 from '../assets/imgs/image-product-4-thumbnail.jpg';
+import imageProduct1 from '../assets/imgs/image-product-1.webp';
+import imageProduct2 from '../assets/imgs/image-product-2.webp';
+import imageProduct3 from '../assets/imgs/image-product-3.webp';
+import imageProduct4 from '../assets/imgs/image-product-4.webp';
+import imageProductThumb1 from '../assets/imgs/image-product-1-thumbnail.webp';
+import imageProductThumb2 from '../assets/imgs/image-product-2-thumbnail.webp';
+import imageProductThumb3 from '../assets/imgs/image-product-3-thumbnail.webp';
+import imageProductThumb4 from '../assets/imgs/image-product-4-thumbnail.webp';
 
 export const imageSources: Record<number, string> = {
   1: imageProduct1,

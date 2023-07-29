@@ -1,5 +1,5 @@
 import { CartItem } from '../interfaces/cartInterfaces';
-import imageProduct1 from '../assets/imgs/image-product-1.jpg';
+import imageProduct1 from '../assets/imgs/image-product-1.webp';
 import deleteIconSvg from '../assets/icons/icon-delete.svg';
 
 const cartItemsData = document.querySelector(
