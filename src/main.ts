@@ -4,6 +4,7 @@ import { showProductPopup } from './models/showProductPopup';
 import { addToCart } from './models/addToCart';
 import { Product } from './interfaces/cartInterfaces';
 import { imageSources } from './interfaces/imagesInterface';
+import { checkImgCard } from './models/checkImgCard';
 
 /* Header with small devices */
 const toggleIcon = <HTMLDivElement>document.querySelector('.toggle-icon');
@@ -29,9 +30,13 @@ closeIcon.addEventListener('click', (): void => {
 /**
  * Adding data-src to all thumbnal imgs
  */
-productImgsContainer.forEach((imgContainer: HTMLDivElement, i:number): void => {
-  (imgContainer.children[0] as HTMLElement).dataset.src = `${imageSources[i + 1]}`;
-});
+productImgsContainer.forEach(
+  (imgContainer: HTMLDivElement, i: number): void => {
+    (imgContainer.children[0] as HTMLElement).dataset.src = `${
+      imageSources[i + 1]
+    }`;
+  }
+);
 
 /*  - Toggling between product images
     - Show Popup
@@ -74,7 +79,18 @@ nextIcon.addEventListener('click', (): void => {
   setTimeout((): void => {
     mainImg.style.opacity = '1';
     currentItem++;
-    checker();
+
+    if (currentItem > productImgsContainer.length) {
+      currentItem = 1;
+    }
+
+    checkImgCard(
+      currentItem,
+      productImgsContainer,
+      mainImg,
+      popupImgId,
+      removeAllActive
+    );
   }, 180);
 });
 
@@ -83,27 +99,28 @@ prevIcon.addEventListener('click', (): void => {
   setTimeout((): void => {
     mainImg.style.opacity = '1';
     currentItem--;
-    checker();
+
+    if (currentItem === 0) {
+      currentItem = productImgsContainer.length;
+    }
+
+    checkImgCard(
+      currentItem,
+      productImgsContainer,
+      mainImg,
+      popupImgId,
+      removeAllActive
+    );
   }, 180);
 });
 
-function checker(): void {
-  if (currentItem > productImgsContainer.length) {
-    currentItem = 1;
-  }
-
-  if (currentItem === 0) {
-    currentItem = productImgsContainer.length;
-  }
-
-  mainImg.src = `${imageSources[currentItem]}`;
-  mainImg.dataset.number = currentItem.toString();
-  popupImgId = parseInt(mainImg.dataset.number);
-
-  removeAllActive(productImgsContainer);
-  productImgsContainer[currentItem - 1].classList.add('active');
-}
-checker();
+checkImgCard(
+  currentItem,
+  productImgsContainer,
+  mainImg,
+  popupImgId,
+  removeAllActive
+);
 
 /* 
     Global

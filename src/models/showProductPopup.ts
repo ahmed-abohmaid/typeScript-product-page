@@ -4,6 +4,7 @@ import imageProductThumb2 from '../assets/imgs/image-product-2-thumbnail.jpg';
 import imageProductThumb3 from '../assets/imgs/image-product-3-thumbnail.jpg';
 import imageProductThumb4 from '../assets/imgs/image-product-4-thumbnail.jpg';
 import { imageSources } from '../interfaces/imagesInterface';
+import { checkImgCard } from './checkImgCard';
 
 interface PopupOptions {
   popupContainer: HTMLDivElement;
@@ -141,7 +142,18 @@ export function showProductPopup(options: PopupOptions): void {
     setTimeout((): void => {
       popupMainImg.style.opacity = '1';
       currentItem++;
-      checker();
+
+      if (currentItem > popupProductImgsContainer.length) {
+        currentItem = 1;
+      }
+    
+      checkImgCard(
+        currentItem,
+        popupProductImgsContainer,
+        popupMainImg,
+        popupImgId,
+        removeAllActive
+      );
     }, 180);
   });
 
@@ -150,25 +162,28 @@ export function showProductPopup(options: PopupOptions): void {
     setTimeout((): void => {
       popupMainImg.style.opacity = '1';
       currentItem--;
-      checker();
+
+      if (currentItem === 0) {
+        currentItem = popupProductImgsContainer.length;
+      }
+
+      checkImgCard(
+        currentItem,
+        popupProductImgsContainer,
+        popupMainImg,
+        popupImgId,
+        removeAllActive
+      );
     }, 180);
   });
 
-  function checker(): void {
-    if (currentItem > popupProductImgsContainer.length) {
-      currentItem = 1;
-    }
-
-    if (currentItem === 0) {
-      currentItem = popupProductImgsContainer.length;
-    }
-
-    popupMainImg.src = `${imageSources[currentItem]}`;
-
-    removeAllActive(popupProductImgsContainer);
-    popupProductImgsContainer[currentItem - 1].classList.add('active');
-  }
-  checker();
+  checkImgCard(
+    currentItem,
+    popupProductImgsContainer,
+    popupMainImg,
+    popupImgId,
+    removeAllActive
+  );
 
   function closePopup(): void {
     popupContainer.style.opacity = '0';
