@@ -133,8 +133,8 @@ export function showProductPopup(options: PopupOptions): void {
         currentItem,
         popupProductImgsContainer,
         popupMainImg,
-        popupImgId,
-        removeAllActive
+        removeAllActive,
+        popupImgId
       );
     }, 180);
   });
@@ -153,8 +153,8 @@ export function showProductPopup(options: PopupOptions): void {
         currentItem,
         popupProductImgsContainer,
         popupMainImg,
-        popupImgId,
-        removeAllActive
+        removeAllActive,
+        popupImgId
       );
     }, 180);
   });
@@ -163,8 +163,8 @@ export function showProductPopup(options: PopupOptions): void {
     currentItem,
     popupProductImgsContainer,
     popupMainImg,
-    popupImgId,
-    removeAllActive
+    removeAllActive,
+    popupImgId
   );
 
   function closePopup(): void {

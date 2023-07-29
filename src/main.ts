@@ -88,8 +88,8 @@ nextIcon.addEventListener('click', (): void => {
       currentItem,
       productImgsContainer,
       mainImg,
-      popupImgId,
-      removeAllActive
+      removeAllActive,
+      popupImgId
     );
   }, 180);
 });
@@ -108,8 +108,8 @@ prevIcon.addEventListener('click', (): void => {
       currentItem,
       productImgsContainer,
       mainImg,
-      popupImgId,
-      removeAllActive
+      removeAllActive,
+      popupImgId
     );
   }, 180);
 });
@@ -118,8 +118,8 @@ checkImgCard(
   currentItem,
   productImgsContainer,
   mainImg,
-  popupImgId,
-  removeAllActive
+  removeAllActive,
+  popupImgId
 );
 
 /* 
