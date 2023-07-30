@@ -282,6 +282,7 @@ nav #close {
 /* Start Page Content */
 main {
   padding: 60px 200px;
+  padding-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -558,6 +559,21 @@ main .product-popup-container .current-img .prev:hover svg path {
 }
 
 /* End Page Content */
+
+footer {
+  padding: 20px;
+  text-align: center;
+  background-color: var(--neutral-lightGrayishBlue);
+}
+
+footer a {
+  color: var(--primary-orange);
+  transition: var(--hover);
+}
+
+footer a:hover {
+text-decoration: underline;
+}
 
 @media (max-width: 1269px) {
   main {
